@@ -10,12 +10,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const handleClick = (e) => {
+  console.log("hello");
+};
+
 export default function SearchButton() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button variant="contained" color="primary">
+      <Button onClick={handleClick} variant="contained" color="primary">
         Search
       </Button>
     </div>
