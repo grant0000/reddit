@@ -7,7 +7,7 @@ describe("Navbar testing", () => {
   test("render the title of the Navbar", () => {
     const wrapper = shallow(<Navbar />);
     expect(wrapper.find("WithStyles(ForwardRef(Typography))").text()).toContain(
-      "Reddit Minimal"
+      "Reddit Reduced"
     );
   });
 });
