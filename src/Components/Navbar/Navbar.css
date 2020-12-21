@@ -5,6 +5,35 @@
   height: 90px;
 }
 
-.logo {
+svg {
   height: 100%;
+  margin: 0 auto;
+}
+
+#logo {
+  animation: logo 1s ease;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes logo {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+#Vector_4 {
+  animation: Vector_4 2s ease;
+}
+
+@keyframes Vector_4 {
+  from {
+    fill: #3f50b5;
+  }
+  to {
+    fill: black;
+  }
 }

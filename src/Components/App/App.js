@@ -21,27 +21,36 @@ function App() {
 
   const [redditData, setRedditData] = useState({});
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("popular");
+  const [search, setSearch] = useState("chicago%20illinois");
 
   useEffect(() => {
     getRedditData();
   }, [search]);
 
   const getRedditData = async () => {
-    const response = await fetch(`https://www.reddit.com/r/${search}.json`);
+    setLoading(true);
+    const response = await fetch(
+      `https://www.reddit.com/search.json?q=${search}`
+    );
     const data = await response.json();
     setRedditData(data);
+    console.log(redditData);
     setLoading(false);
-    console.log(data);
-    // console.log(redditData.data.children[2].data.title);
   };
 
   const keyPress = (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
-      setSearch(e.target.value);
-      console.log(search);
+      const search = e.target.value;
+      const adjustedSearch = search.split(" ").join("%20");
+      setSearch(adjustedSearch);
     }
+  };
+
+  const timeConverter = (utc) => {
+    var unixTimestamp = utc;
+    var date = new Date(unixTimestamp * 1000);
+    return date;
   };
 
   return (
@@ -69,8 +78,10 @@ function App() {
               <RedditCard
                 key={Math.random()}
                 cardTitle={post.data.title}
-                cardTime={post.data.created_utc}
+                cardTime={timeConverter(post.data.created_utc).toString()}
                 className="r-card"
+                imageUrl={post.data.url}
+                ratio={post.data.upvote_ratio}
               />
             </div>
           ))
